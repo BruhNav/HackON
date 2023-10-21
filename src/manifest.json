@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Chrome Extension with React & Webpack",
-  "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
+  "name": "Amazon Search Assistant",
+  "description": "A chrome extension to help you search for products on Amazon",
   "options_page": "options.html",
   "background": { "service_worker": "background.bundle.js" },
   "action": {

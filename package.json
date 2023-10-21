@@ -1,7 +1,7 @@
 {
-  "name": "chrome-extension-boilerplate-react",
-  "version": "5.0.4",
-  "description": "A chrome extension boilerplate built with React 18, Webpack 5, and Webpack Dev Server 4",
+  "name": "amazonsearchassistant",
+  "description": "A chrome extension to help you search for products on Amazon",
+  "version": "1.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
