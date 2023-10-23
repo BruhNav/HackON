@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '@pages/popup/Popup.css';
 // import withSuspense from '@src/shared/hoc/withSuspense';
 // import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
@@ -7,14 +7,20 @@ import { IoSend } from 'react-icons/io5';
 const Popup = () => {
 
 	const [message, setMessage] = React.useState('');
+  const [filterList, setFilterList] = React.useState([]);
 	
 	const handleSubmit = (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
-		chrome.runtime.sendMessage( {message : message} , (response) => {
+		chrome.runtime.sendMessage( {type:'background', message : message} , (response) => {
 			if(response) console.log(response.response);
 		});
 		setMessage('');
     }
+
+  useEffect(() => {
+    chrome.runtime.sendMessage( {type:'content', message : filterList});
+  }, [filterList]);
+  
 
 	return (
 		<div className="p-1">
