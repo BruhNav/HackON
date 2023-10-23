@@ -1,6 +1,9 @@
 {
+  "trailingComma": "all",
+  "semi": true,
   "singleQuote": true,
-  "trailingComma": "es5",
-  "requirePragma": false,
-  "arrowParens": "always"
+  "arrowParens": "avoid",
+  "printWidth": 120,
+  "bracketSameLine": true,
+  "htmlWhitespaceSensitivity": "strict"
 }

@@ -1,150 +1,172 @@
-<img src="src/assets/img/icon-128.png" width="64"/>
 
-# Chrome Extension (MV3) Boilerplate with React 18 and Webpack 5
+<div align="center">
+<img src="public/icon-128.png" alt="logo"/>
+<h1> Chrome Extension Boilerplate with<br/>React + Vite + TypeScript</h1>
 
-[![npm](https://img.shields.io/npm/v/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
-[![npm-download](https://img.shields.io/npm/dw/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
-[![npm](https://img.shields.io/npm/dm/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
+![](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![](https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![](https://badges.aleen42.com/src/vitejs.svg)
+![GitHub action badge](https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite/actions/workflows/build-zip.yml/badge.svg)
+<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/Jonghakseo/chrome-extension-boilerplate-react-viteFactions&count_bg=%23#222222&title_bg=%23#454545&title=😀&edge_flat=true" alt="hits"/>
 
-## Announcements
 
-- Recently updated from **[React](https://reactjs.org)** ~~17~~ to **18**!
-- **_This boilerplate adopts [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/)!_**
-  - For V2 users, please check out the [manifest-v2](https://github.com/lxieyang/chrome-extension-boilerplate-react/tree/manifest-v2) branch, or use version [3.x](https://www.npmjs.com/package/chrome-extension-boilerplate-react/v/3.3.0).
-  - Check out the [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/).
-- Recently added [devtools](https://developer.chrome.com/docs/extensions/mv3/devtools/) Support! Thanks [GeekaholicLin](https://github.com/lxieyang/chrome-extension-boilerplate-react/issues/17)!
-- Recently updated from **[Webpack Dev Server](https://webpack.js.org/configuration/dev-server/)** ~~3.x~~ to **4.x** and **[Webpack](https://webpack.js.org/)** ~~4~~ to **5**!
-- Recently added [TypeScript](https://www.typescriptlang.org/) Support!
+> This project is listed in the [Awesome Vite](https://github.com/vitejs/awesome-vite)
 
-## Features
+</div>
 
-This is a basic Chrome Extensions boilerplate to help you write modular and modern Javascript code, load CSS easily and [automatic reload the browser on code changes](https://webpack.github.io/docs/webpack-dev-server.html#automatic-refresh).
+## Table of Contents
 
-This boilerplate is updated with:
+- [Intro](#intro)
+- [Features](#features)
+- [Installation](#installation)
+    - [Procedures](#procedures)
+      - [Chrome](#chrome) 
+      - [Firefox](#firefox) 
+- [Screenshots](#screenshots)
+    - [NewTab](#newtab)
+    - [Popup](#popup)
+- [Examples](#examples)
+- [Documents](#documents)
 
-- [Chrome Extension Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/)
-- [React 18](https://reactjs.org)
-- [Webpack 5](https://webpack.js.org/)
-- [Webpack Dev Server 4](https://webpack.js.org/configuration/dev-server/)
-- [React Refresh](https://www.npmjs.com/package/react-refresh)
-- [react-refresh-webpack-plugin](https://github.com/pmmmwh/react-refresh-webpack-plugin)
-- [eslint-config-react-app](https://www.npmjs.com/package/eslint-config-react-app)
-- [Prettier](https://prettier.io/)
+## Intro <a name="intro"></a>
+
+This boilerplate is made for creating chrome extensions using React and Typescript.
+> The focus was on improving the build speed and development experience with Vite.
+
+## Features <a name="features"></a>
+
+- [React 18](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Jest](https://jestjs.io/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Vite](https://vitejs.dev/)
+- [SASS](https://sass-lang.com/)
+- [Twind](https://twind.dev/)
+- [Prettier](https://prettier.io/)
+- [ESLint](https://eslint.org/)
+- [Husky](https://typicode.github.io/husky/getting-started.html#automatic-recommended)
+- [Commitlint](https://commitlint.js.org/#/guides-local-setup?id=install-commitlint)
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
+- [Chrome Extension Manifest Version 3](https://developer.chrome.com/docs/extensions/mv3/intro/)
+- HRR(Hot Rebuild & Refresh/Reload)
 
-This boilerplate is heavily inspired by and adapted from [https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate), with additional support for React 18 features, Webpack 5, and Webpack Dev Server 4.
+## Installation <a name="installation"></a>
 
-Please open up an issue to nudge me to keep the npm packages up-to-date. FYI, it takes time to make different packages with different versions work together nicely.
+## Procedures: <a name="procedures"></a>
 
-## Installing and Running
+1. Clone this repository.
+2. Change `name` and `description` in package.json => **Auto synchronize with manifest**
+3. Install pnpm globally: `npm install -g pnpm` (check your node version >= 16.6, recommended >= 18)
+4. Run `pnpm install` 
 
-### Procedures:
+## And next, depending on the needs:
 
-1. Check if your [Node.js](https://nodejs.org/) version is >= **18**.
-2. Clone this repository.
-3. Change the package's `name`, `description`, and `repository` fields in `package.json`.
-4. Change the name of your extension on `src/manifest.json`.
-5. Run `npm install` to install the dependencies.
-6. Run `npm start`
-7. Load your extension on Chrome following:
-   1. Access `chrome://extensions/`
-   2. Check `Developer mode`
-   3. Click on `Load unpacked extension`
-   4. Select the `build` folder.
-8. Happy hacking.
+### For Chrome: <a name="chrome"></a>
 
-## Structure
+1. Run:
+    - Dev: `pnpm dev` or `npm run dev`
+    - Prod: `pnpm build` or `npm run build`
+2. Open in browser - `chrome://extensions`
+3. Check - `Developer mode`
+4. Find and Click - `Load unpacked extension`
+5. Select - `dist` folder
 
-All your extension's code must be placed in the `src` folder.
+### For Firefox: <a name="firefox"></a>
 
-The boilerplate is already prepared to have a popup, an options page, a background page, and a new tab page (which replaces the new tab page of your browser). But feel free to customize these.
+1. Run:
+    - Dev: `pnpm dev:firefox` or `npm run dev:firefox`
+    - Prod: `pnpm build:firefox` or `npm run build:firefox`
+2. Open in browser - `about:debugging#/runtime/this-firefox`
+3. Find and Click - `Load Temporary Add-on...`
+4. Select - `manifest.json` from `dist` folder
 
-## TypeScript
+### <i>Remember in firefox you add plugin in temporary mode, that's mean it's disappear after close browser, you must do it again, on next launch.</i>
 
-This boilerplate now supports TypeScript! The `Options` Page is implemented using TypeScript. Please refer to `src/pages/Options/` for example usages.
+## Screenshots <a name="screenshots"></a>
 
-## Webpack auto-reload and HRM
+### New Tab <a name="newtab"></a>
 
-To make your workflow much more efficient this boilerplate uses the [webpack server](https://webpack.github.io/docs/webpack-dev-server.html) to development (started with `npm start`) with auto reload feature that reloads the browser automatically every time that you save some file in your editor.
+<img width="971" src="https://user-images.githubusercontent.com/53500778/162631646-cd40976b-b737-43d0-8e6a-6ac090a2e2d4.png">
 
-You can run the dev mode on other port if you want. Just specify the env var `port` like this:
+### Popup <a name="popup"></a>
 
-```
-$ PORT=6002 npm run start
-```
+<img width="314" alt="popup" src="https://user-images.githubusercontent.com/53500778/203561728-23517d46-12e3-4139-8a4f-e0b2f22a6ab3.png">
 
-## Content Scripts
+## Examples <a name="examples"></a>
 
-Although this boilerplate uses the webpack dev server, it's also prepared to write all your bundles files on the disk at every code change, so you can point, on your extension manifest, to your bundles that you want to use as [content scripts](https://developer.chrome.com/extensions/content_scripts), but you need to exclude these entry points from hot reloading [(why?)](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate/issues/4#issuecomment-261788690). To do so you need to expose which entry points are content scripts on the `webpack.config.js` using the `chromeExtensionBoilerplate -> notHotReload` config. Look the example below.
+- https://github.com/Jonghakseo/drag-gpt-extension
+- https://github.com/Jonghakseo/pr-commit-noti
+- https://github.com/ariburaco/chatgpt-file-uploader-extended
 
-Let's say that you want use the `myContentScript` entry point as content script, so on your `webpack.config.js` you will configure the entry point and exclude it from hot reloading, like this:
+## Documents <a name="documents"></a>
 
-```js
-{
-  …
-  entry: {
-    myContentScript: "./src/js/myContentScript.js"
-  },
-  chromeExtensionBoilerplate: {
-    notHotReload: ["myContentScript"]
-  }
-  …
-}
-```
+- [Vite Plugin](https://vitejs.dev/guide/api-plugin.html)
+- [ChromeExtension](https://developer.chrome.com/docs/extensions/mv3/)
+- [Rollup](https://rollupjs.org/guide/en/)
+- [Rollup-plugin-chrome-extension](https://www.extend-chrome.dev/rollup-plugin)
 
-and on your `src/manifest.json`:
+## Star History
 
-```json
-{
-  "content_scripts": [
-    {
-      "matches": ["https://www.google.com/*"],
-      "js": ["myContentScript.bundle.js"]
-    }
-  ]
-}
-```
+[![Star History Chart](https://api.star-history.com/svg?repos=Jonghakseo/chrome-extension-boilerplate-react-vite&type=Date)](https://star-history.com/#Jonghakseo/chrome-extension-boilerplate-react-vite&Date)
 
-## Intelligent Code Completion
+## Contributors
 
-Thanks to [@hudidit](https://github.com/lxieyang/chrome-extension-boilerplate-react/issues/4)'s kind suggestions, this boilerplate supports chrome-specific intelligent code completion using [@types/chrome](https://www.npmjs.com/package/@types/chrome).
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/JunyWuuuu91"><img src="https://avatars.githubusercontent.com/u/33750626?v=4?s=50" width="50px;" alt="JunyWuuuu91"/><br /><sub><b>JunyWuuuu91</b></sub></a><br /><a href="#code-JunyWuuuu91" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dim0147"><img src="https://avatars.githubusercontent.com/u/44487221?v=4?s=50" width="50px;" alt="dim0147"/><br /><sub><b>dim0147</b></sub></a><br /><a href="#bug-dim0147" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.youtube.com/user/Learnbynet"><img src="https://avatars.githubusercontent.com/u/24865815?v=4?s=50" width="50px;" alt="jon lepage"/><br /><sub><b>jon lepage</b></sub></a><br /><a href="#bug-djmisterjon" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://lironhazan.com/"><img src="https://avatars.githubusercontent.com/u/9695142?v=4?s=50" width="50px;" alt="LironH"/><br /><sub><b>LironH</b></sub></a><br /><a href="#ideas-LironHazan" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://spencerchang.me"><img src="https://avatars.githubusercontent.com/u/14796580?v=4?s=50" width="50px;" alt="Spencer Chang"/><br /><sub><b>Spencer Chang</b></sub></a><br /><a href="#bug-spencerc99" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/deld123"><img src="https://avatars.githubusercontent.com/u/110054621?v=4?s=50" width="50px;" alt="deld123"/><br /><sub><b>deld123</b></sub></a><br /><a href="#bug-deld123" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/hakunin"><img src="https://avatars.githubusercontent.com/u/65846?v=4?s=50" width="50px;" alt="Michal Hantl"/><br /><sub><b>Michal Hantl</b></sub></a><br /><a href="#ideas-hakunin" title="Ideas, Planning, & Feedback">🤔</a> <a href="#bug-hakunin" title="Bug reports">🐛</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://twitter.com/jordnb"><img src="https://avatars.githubusercontent.com/u/1463197?v=4?s=50" width="50px;" alt="Jordan Burgess"/><br /><sub><b>Jordan Burgess</b></sub></a><br /><a href="#ideas-jordn" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/NAMU1105"><img src="https://avatars.githubusercontent.com/u/47317129?v=4?s=50" width="50px;" alt="NAMEUN CHO"/><br /><sub><b>NAMEUN CHO</b></sub></a><br /><a href="#bug-NAMU1105" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Araneline"><img src="https://avatars.githubusercontent.com/u/2670262?v=4?s=50" width="50px;" alt="Andrew Mudrov"/><br /><sub><b>Andrew Mudrov</b></sub></a><br /><a href="#question-Araneline" title="Answering Questions">💬</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://shubhamlad.in"><img src="https://avatars.githubusercontent.com/u/30789414?v=4?s=50" width="50px;" alt="Shubham Lad"/><br /><sub><b>Shubham Lad</b></sub></a><br /><a href="#bug-ShuLaPy" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/hanrongliao"><img src="https://avatars.githubusercontent.com/u/38458886?v=4?s=50" width="50px;" alt="hanrong"/><br /><sub><b>hanrong</b></sub></a><br /><a href="#bug-hanrongliao" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://koeni.dev"><img src="https://avatars.githubusercontent.com/u/32238636?v=4?s=50" width="50px;" alt="Florian König"/><br /><sub><b>Florian König</b></sub></a><br /><a href="#question-koenidv" title="Answering Questions">💬</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/TP-O"><img src="https://avatars.githubusercontent.com/u/53143403?v=4?s=50" width="50px;" alt="Tran Phong"/><br /><sub><b>Tran Phong</b></sub></a><br /><a href="#bug-TP-O" title="Bug reports">🐛</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/tonychandesign"><img src="https://avatars.githubusercontent.com/u/22465526?v=4?s=50" width="50px;" alt="tonychandesign"/><br /><sub><b>tonychandesign</b></sub></a><br /><a href="#bug-tonychandesign" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dellyn"><img src="https://avatars.githubusercontent.com/u/54443742?v=4?s=50" width="50px;" alt="Ihor Makarchuk"/><br /><sub><b>Ihor Makarchuk</b></sub></a><br /><a href="#bug-dellyn" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/hugoobauer"><img src="https://avatars.githubusercontent.com/u/46481101?v=4?s=50" width="50px;" alt="hugoobauer"/><br /><sub><b>hugoobauer</b></sub></a><br /><a href="#bug-hugoobauer" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://itskaransingh.vercel.app"><img src="https://avatars.githubusercontent.com/u/112791089?v=4?s=50" width="50px;" alt="Karan Singh"/><br /><sub><b>Karan Singh</b></sub></a><br /><a href="#ideas-itskaransingh" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/remusris"><img src="https://avatars.githubusercontent.com/u/91991249?v=4?s=50" width="50px;" alt="remusris"/><br /><sub><b>remusris</b></sub></a><br /><a href="#ideas-remusris" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/hegelwatch"><img src="https://avatars.githubusercontent.com/u/11195987?v=4?s=50" width="50px;" alt="hegel_dark"/><br /><sub><b>hegel_dark</b></sub></a><br /><a href="#ideas-hegelwatch" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/lookis"><img src="https://avatars.githubusercontent.com/u/445022?v=4?s=50" width="50px;" alt="Jingsi"/><br /><sub><b>Jingsi</b></sub></a><br /><a href="#bug-lookis" title="Bug reports">🐛</a> <a href="#code-lookis" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/chrisozgo99"><img src="https://avatars.githubusercontent.com/u/46030410?v=4?s=50" width="50px;" alt="Chris Ozgo"/><br /><sub><b>Chris Ozgo</b></sub></a><br /><a href="#bug-chrisozgo99" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ssikyou"><img src="https://avatars.githubusercontent.com/u/5118469?v=4?s=50" width="50px;" alt="Cong"/><br /><sub><b>Cong</b></sub></a><br /><a href="#bug-ssikyou" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/PatrykKuniczak"><img src="https://avatars.githubusercontent.com/u/64608510?v=4?s=50" width="50px;" alt="PatrykKuniczak"/><br /><sub><b>PatrykKuniczak</b></sub></a><br /><a href="#ideas-PatrykKuniczak" title="Ideas, Planning, & Feedback">🤔</a> <a href="#code-PatrykKuniczak" title="Code">💻</a> <a href="#doc-PatrykKuniczak" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://hector.parra.cat"><img src="https://avatars.githubusercontent.com/u/34079?v=4?s=50" width="50px;" alt="Hector Parra"/><br /><sub><b>Hector Parra</b></sub></a><br /><a href="#bug-hector" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://blog.rhea-so.link"><img src="https://avatars.githubusercontent.com/u/25793226?v=4?s=50" width="50px;" alt="JeongHyeon Kim"/><br /><sub><b>JeongHyeon Kim</b></sub></a><br /><a href="#infra-rhea-so" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://terminels.com"><img src="https://avatars.githubusercontent.com/u/73331790?v=4?s=50" width="50px;" alt="Terminels"/><br /><sub><b>Terminels</b></sub></a><br /><a href="#code-PrinOrange" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
 
-## Packing
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 
-After the development of your extension run the command
-
-```
-$ NODE_ENV=production npm run build
-```
-
-Now, the content of `build` folder will be the extension ready to be submitted to the Chrome Web Store. Just take a look at the [official guide](https://developer.chrome.com/webstore/publish) to more infos about publishing.
-
-## Secrets
-
-If you are developing an extension that talks with some API you probably are using different keys for testing and production. Is a good practice you not commit your secret keys and expose to anyone that have access to the repository.
-
-To this task this boilerplate import the file `./secrets.<THE-NODE_ENV>.js` on your modules through the module named as `secrets`, so you can do things like this:
-
-_./secrets.development.js_
-
-```js
-export default { key: '123' };
-```
-
-_./src/popup.js_
-
-```js
-import secrets from 'secrets';
-ApiCall({ key: secrets.key });
-```
-
-:point_right: The files with name `secrets.*.js` already are ignored on the repository.
-
-## Resources:
-
-- [Webpack documentation](https://webpack.js.org/concepts/)
-- [Chrome Extension documentation](https://developer.chrome.com/extensions/getstarted)
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ---
 
-Michael Xieyang Liu | [Website](https://lxieyang.github.io)
+## Thanks To
+
+| [Jetbrains](https://jb.gg/OpenSourceSupport)                                                                                               | [Jackson Hong](https://www.linkedin.com/in/j-acks0n/)                                            |
+|--------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| <img width="100" src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo (Main) logo."> | <img width="100" src='https://avatars.githubusercontent.com/u/23139754?v=4' alt='Jackson Hong'/> |
+
+---
+
+[Jonghakseo](https://nookpi.tistory.com/)
