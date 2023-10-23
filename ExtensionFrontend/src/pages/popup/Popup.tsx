@@ -14,14 +14,14 @@ const Popup = () => {
 	
 	const handleSubmit = (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
-		chrome.runtime.sendMessage( {type:'background', message : message} , (response) => {
+		chrome.runtime.sendMessage( {type:'background', data : message} , (response) => {
 			if(response) console.log(response.response);
 		});
 		setMessage('');
     }
 
   useEffect(() => {
-    chrome.runtime.sendMessage( {type:'content', message : filterList});
+    chrome.runtime.sendMessage( {type:'content', data : filterList});
   }, [filterList]);
   
 
