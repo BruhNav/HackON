@@ -1,6 +1,8 @@
 // Backend (Node.js with Express)
 const express = require('express');
 const mysql = require('mysql2');
+const OpenAI = require("openai");
+require('dotenv').config()
 
 const port = 3000
 const app = express();
@@ -21,24 +23,37 @@ db.connect((err) => {
     console.log('Connected to the database');
 });
 
-
-
-
-
-app.get('/genai', (req, res) => {
-    const { search_entry } = req.query;
-    if ( search_entry ) {
-        res.send(` your value is ${search_entry} ` );
-    }
-    else {
-        res.send('i recieved no kv pair');
-    }
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
 });
 
+async function getFilters(prompt) {
+    const chatCompletion = await openai.chat.completions.create({
+        messages: [{ role: 'user', content: prompt }],
+        model: 'gpt-3.5-turbo',
+    });
+
+    console.log(chatCompletion.choices);
+    return chatCompletion.choices[0].message.content;
+}
 
 
 
-
+app.get('/genai', async (req, res) => {
+    const { search_entry } = req.query;
+    if (search_entry) {
+        try {
+            const prompt = "Extract the brand name from the search term and return it as json ex. {'brand': 'samsung, 'price': 40000} \nSearch term: " + search_entry;
+            const response = await getFilters(prompt);
+            res.send(`${response}`);
+        } catch (error) {
+            console.error('Error with OpenAI:', error);
+            res.status(500).send('An error occurred with OpenAI');
+        }
+    } else {
+        res.send('I received no key-value pair.');
+    }
+});
 
 
 
