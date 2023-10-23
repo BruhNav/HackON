@@ -7,7 +7,10 @@ import { IoSend } from 'react-icons/io5';
 const Popup = () => {
 
 	const [message, setMessage] = React.useState('');
-  const [filterList, setFilterList] = React.useState([]);
+  const [filterList, setFilterList] = React.useState({
+    "brand":"Samsung",
+    "OS":"Android 10.0",
+});
 	
 	const handleSubmit = (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
