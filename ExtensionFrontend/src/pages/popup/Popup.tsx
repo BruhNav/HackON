@@ -8,11 +8,13 @@ const Popup = () => {
 
 	const [message, setMessage] = React.useState('');
 	const [filterList, setFilterList] = React.useState({});
-	const [chatHistory, setChatHistory] = React.useState([]); // [{message: '', type: 'user'},{message: '', type: 'bot'}
+	const [chatHistory, setChatHistory] = React.useState([{message: 'Hi, what do you want to buy ?', type: 'bot1'}]); // [{message: '', type: 'user'},{message: '', type: 'bot'}
 	
 	const handleSubmit = (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
-		setChatHistory([...chatHistory, {message: message, type: 'user'}]);
+		if(message !== '') {
+			setChatHistory([...chatHistory, {message: message, type: 'user'}]);
+		}
 		chrome.runtime.sendMessage( {type:'background', data : message} , (response) => {
 			if(response) console.log(response.response);
 
@@ -30,13 +32,22 @@ const Popup = () => {
 
 	return (
 		<div className="p-1">
-			<div>
+			<div className="h-auto my-2 mx-2 overflow-hidden flex flex-col gap-2">
 				{ chatHistory.map((item, index) => {
-					return (
-						<div key={index}>
-						{item.key} : {item.message}
-						</div>
-					);
+					if(item.type === 'user') {
+						return (
+							<div key={index} className={`transition duration-100 linear w-max flex flex-start ml-auto text-white px-2 py-2 border-none rounded-md bg-violet-800 hover:-translate-x-0.5`}>
+								{item.message}
+							</div>
+						);
+					}
+					else {
+						return (
+							<div key={index} className={`transition duration-100 linear w-max flex items-start text-white px-2 py-2 overflow-hidden border-none rounded-md bg-gray-800 hover:translate-x-0.5`}>
+								{item.message}
+							</div>
+						);
+					}
 				}) }
 			</div>
 			<div className="flex w-full fixed bottom-2">
