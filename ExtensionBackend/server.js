@@ -2,6 +2,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const OpenAI = require("openai");
+const axios = require("axios");
 require('dotenv').config()
 
 const port = 3000
@@ -38,14 +39,136 @@ async function getFilters(prompt) {
 }
 
 
+async function extractPercentileScore ( jsonobj )
+{
+    let returnval = jsonobj;
+    try 
+    {
+        const subcat = jsonobj.subcategory;
+        if( subcat === "laptop" )
+        {
+
+            let response = await axios.get ( "http://localhost:3000/calculateWeightedPercentile/laptop");
+            response = response.data;
+            let wpercent = response.weightedPercentile;
+
+            console.log ( wpercent );
+
+            let wprice = 40000; 
+            if ( wpercent >= 75 )
+            {
+                wprice = 90000;
+            }
+            else if ( wpercent >= 60 )
+            {
+                wprice = 70000;
+            }
+            else if ( wpercent >= 40 )
+            {
+                wprice = 40000;
+            }
+            else 
+            {
+                wprice = 30000;
+            }
+
+            
+
+            returnval.price = wprice;  
+            
+            console.log ( "mai yahan hyu yahan 2 ");
+        }
+        else if ( subcat === "smartphone" )
+        {
+             console.log ( "mai yahan hyu yahan 1 ");
+            let response = await axios.get ( "http://localhost:3000/calculateWeightedPercentile/smartphone");
+                console.log ( "mai yahan hyu yahan 2 ");
+                console.log ( response );
+            response = response.data;
+             console.log ( "mai yahan hyu yahan 2.4 ");
+            let wpercent = response.weightedPercentile;
+             console.log ( "mai yahan hyu yahan 2.7 ");
+            let wprice = 20000; 
+            if ( wpercent >= 75 )
+            {
+                wprice = 40000;
+            }
+            else if ( wpercent >= 60 )
+            {
+                wprice = 20000;
+            }
+            else if ( wpercent >= 40 )
+            {
+                wprice = 15000;
+            }
+            else 
+            {
+                wprice = 3000;
+            }
+            console.log ( "mai yahan hyu yahan 3 ");
+            returnval.price = wprice; 
+            console.log ( "mai yahan hyu yahan 4 ");
+        }
+
+        //const response  = await axios.get ( "http://localhost:3000/calculateWeightedPercentile/others" );
+        return returnval;
+    }
+    catch(error)
+    {
+        console.log( " kuch gdbd hai extraction of percentile mei " );
+        throw error;
+    }
+}
+
 
 app.get('/genai', async (req, res) => {
     const { search_entry } = req.query;
     if (search_entry) {
         try {
-            const prompt = "Extract the brand name from the search term and return it as json ex. {'brand': 'samsung, 'price': 40000} \nSearch term: " + search_entry;
+            const prompt = 'Extract the brand name from the search term, also categorize it in \
+                            one of the three ways, electronics, clothings, books  ,\
+                    also definne a subcategory\
+                    if electronics, subcategory :smartphone, laptop, others \
+                    if clothing , subcategory : tshirt , others \
+                    if any other category, subcategory : others  \
+                    and return it as json ex. {"brand": "samsung", "price": 40000, "category": "electronics" , subcategory:"smartphone"} , just give me a json \
+                    no need to write  a program for the \nSearch term: ' + search_entry;
             const response = await getFilters(prompt);
-            res.send(`${response}`);
+            let rep2 = response
+
+            console.log ( rep2 );
+            console.log ( typeof(rep2) );
+            const jsonobj = JSON.parse(rep2);
+
+            
+
+            if ( "price" in jsonobj )
+            {
+
+                res.json(jsonobj);
+            }
+            else
+            {
+                // price nahi hai
+                // number 1 
+                // extract the percentile score
+                try
+                    {
+                        const data = await extractPercentileScore ( jsonobj );
+
+                        console.log( "im here ");
+                        console.log ( data );
+                        console.log ( typeof( data ) );
+
+                        res.send(data);
+                        //res.json(data); // Send the response from the GET request
+                    } 
+                catch (error)
+                    {
+                        res.status(500).json({ error: 'An error occurred' });
+                    }
+            }
+        
         } catch (error) {
             console.error('Error with OpenAI:', error);
             res.status(500).send('An error occurred with OpenAI');
