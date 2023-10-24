@@ -17,7 +17,7 @@ const Popup = () => {
 
 
 	const [message, setMessage] = React.useState('');
-	const [filterList, setFilterList] = React.useState();
+	const [loading, setLoading] = React.useState(true);
 	const [chatHistory, setChatHistory] = React.useState([{ message: 'Hi, what do you want to buy ?', type: 'bot1' }]); // [{message: '', type: 'user'},{message: '', type: 'bot'}
 	const userStyle = "h-full w-[60%] text-wrap text-white font-bold px-2 py-2 ml-auto border-none rounded-md bg-pink-800";
 	const botStyle = "h-full w-[60%] text-wrap text-white font-bold px-2 py-2 border-none rounded-md bg-blue-800";
@@ -31,7 +31,7 @@ const Popup = () => {
 		fetch(`http://localhost:3000/genai/?search_entry=${message}`)
 			.then((res) => res.json())
 			.then((data) => {
-				setFilterList({ ...data });
+				setLoading(false);
 
 				const res = `${JSON.stringify(data)}`
 
