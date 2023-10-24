@@ -109,7 +109,8 @@ async function extractPercentileScore ( jsonobj )
             returnval.price = wprice; 
             console.log ( "mai yahan hyu yahan 4 ");
         }
-
+        console.log( "mai yahan hyu yahan 5 ")
+        console.log(returnval);
         return returnval;
     }
     catch(error)
@@ -143,8 +144,8 @@ app.get('/genai', async (req, res) => {
 
             if ( "price" in jsonobj && jsonobj.price != null)
             {
-
-                res.json(jsonobj);
+                console.log(jsonobj);
+                res.send(jsonobj);
             }
             else
             {
