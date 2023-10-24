@@ -19,14 +19,14 @@ const Popup = () => {
 	const [message, setMessage] = React.useState('');
 	const [filterList, setFilterList] = React.useState();
 	const [chatHistory, setChatHistory] = React.useState([{ message: 'Hi, what do you want to buy ?', type: 'bot1' }]); // [{message: '', type: 'user'},{message: '', type: 'bot'}
-	const userStyle = "h-full w-[60%] text-wrap text-white font-bold px-2 py-2 border-none rounded-md bg-pink-800";
-	const botStyle = "h-full w-[60%] text-wrap text-white font-bold  px-2 py-2 ml-auto border-none rounded-md bg-blue-800";
+	const userStyle = "h-full w-[60%] text-wrap text-white font-bold px-2 py-2 ml-auto border-none rounded-md bg-pink-800";
+	const botStyle = "h-full w-[60%] text-wrap text-white font-bold px-2 py-2 border-none rounded-md bg-blue-800";
 
 	const handleSubmit = async (e: { preventDefault: () => void; }) => {
 
 		e.preventDefault();
-		setChatHistory([...chatHistory, { message: 'Loading...', type: 'bot' }]);
-		setChatHistory([...chatHistory, { message: "Sure based on your provided key words following filter have been applied", type: 'bot' }]);
+		setChatHistory((prev) => [...prev, { message: message, type: 'user' }]);
+		setChatHistory((prev) => [...prev, { message: 'Sure based on your provided key words following filter have been applied', type: 'bot' }]);
 
 		fetch(`http://localhost:3000/genai/?search_entry=${message}`)
 			.then((res) => res.json())
@@ -36,8 +36,11 @@ const Popup = () => {
 				const res = `${JSON.stringify(data)}`
 
 				chrome.runtime.sendMessage({ message: data });
-				setChatHistory([...chatHistory, { message: res, type: 'bot' }]);
-				// console.log(chatHistory);
+				setChatHistory((prev) => [...prev, { message: res, type: 'bot' }]);
+			})
+			.catch((error) => {
+				console.error(error);
+				setChatHistory([...chatHistory, { message: "Sorry, an error occurred while fetching data.", type: 'bot' }]);
 			});
 		
 		// console.log(chatHistory);
@@ -70,7 +73,7 @@ const Popup = () => {
 
 					} else {
 						return (
-							<div key={index} className={item.type === "user" ? userStyle : botStyle}>
+							<div key={index} className={item.type === 'user' ? userStyle : botStyle}>
 								{item.message}
 							</div>
 						);
