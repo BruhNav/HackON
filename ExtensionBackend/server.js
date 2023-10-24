@@ -110,7 +110,6 @@ async function extractPercentileScore ( jsonobj )
             console.log ( "mai yahan hyu yahan 4 ");
         }
 
-        //const response  = await axios.get ( "http://localhost:3000/calculateWeightedPercentile/others" );
         return returnval;
     }
     catch(error)
@@ -142,7 +141,7 @@ app.get('/genai', async (req, res) => {
 
             
 
-            if ( "price" in jsonobj )
+            if ( "price" in jsonobj && jsonobj.price != null)
             {
 
                 res.json(jsonobj);

@@ -32,18 +32,18 @@ const Popup = () => {
 
 	return (
 		<div className="p-1">
-			<div className="h-auto my-2 mx-2 overflow-hidden flex flex-col gap-2">
+			<div className="my-2 mx-2 overflow-hidden flex flex-col justify-end gap-2">
 				{ chatHistory.map((item, index) => {
 					if(item.type === 'user') {
 						return (
-							<div key={index} className={`transition duration-100 linear w-max flex flex-start ml-auto text-white px-2 py-2 border-none rounded-md bg-violet-800 hover:-translate-x-0.5`}>
+							<div key={index} className={`w-max text-wrap text-white px-2 py-2 border-none rounded-md bg-violet-800`}>
 								{item.message}
 							</div>
 						);
 					}
 					else {
 						return (
-							<div key={index} className={`transition duration-100 linear w-max flex items-start text-white px-2 py-2 overflow-hidden border-none rounded-md bg-gray-800 hover:translate-x-0.5`}>
+							<div key={index} className={`w-max text-white px-2 py-2 overflow-hidden border-none rounded-md bg-gray-800`}>
 								{item.message}
 							</div>
 						);
