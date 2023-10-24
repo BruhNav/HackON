@@ -14,7 +14,8 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse){
     if (request.type==='background') {
         
         console.log(request.data)
-
+        //api call
+        //response=api call response
         sendResponse({ type: 'response', response: 'this is the response from background.js' });
     }
 

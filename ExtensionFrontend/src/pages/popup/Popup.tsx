@@ -7,15 +7,14 @@ import { IoSend } from 'react-icons/io5';
 const Popup = () => {
 
 	const [message, setMessage] = React.useState('');
-  const [filterList, setFilterList] = React.useState({
-    "brand":"Samsung",
-    "OS":"Android 10.0",
-});
+	const [filterList, setFilterList] = React.useState({});
+	const [chatHistory, setChatHistory] = React.useState([]); // [{message: '', type: 'user'},{message: '', type: 'bot'}
 	
 	const handleSubmit = (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
 		chrome.runtime.sendMessage( {type:'background', data : message} , (response) => {
 			if(response) console.log(response.response);
+			//setFilterList(response.response);
 		});
 		setMessage('');
     }
