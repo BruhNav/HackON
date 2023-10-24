@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '@pages/popup/Popup.css';
 // import withSuspense from '@src/shared/hoc/withSuspense';
 // import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
@@ -6,49 +6,76 @@ import { IoSend } from 'react-icons/io5';
 
 const Popup = () => {
 
-	const [message, setMessage] = React.useState('');
-	const [filterList, setFilterList] = React.useState({});
-	const [chatHistory, setChatHistory] = React.useState([{message: 'Hi, what do you want to buy ?', type: 'bot1'}]); // [{message: '', type: 'user'},{message: '', type: 'bot'}
-	
-	const handleSubmit = (e: { preventDefault: () => void; }) => {
-		e.preventDefault();
-		if(message !== '') {
-			setChatHistory([...chatHistory, {message: message, type: 'user'}]);
+	function isJSONString(str: string) {
+		try {
+			JSON.parse(str);
+		} catch (e) {
+			return false;
 		}
-		chrome.runtime.sendMessage( {type:'background', data : message} , (response) => {
-			if(response) console.log(response.response);
+		return true;
+	}
 
-			// setFilterList(response.response);
 
-			// setChatHistory([...chatHistory, {message: response.response, type: 'bot'}]);
-		});
+	const [message, setMessage] = React.useState('');
+	const [filterList, setFilterList] = React.useState();
+	const [chatHistory, setChatHistory] = React.useState([{ message: 'Hi, what do you want to buy ?', type: 'bot1' }]); // [{message: '', type: 'user'},{message: '', type: 'bot'}
+	const userStyle = "h-full w-[60%] text-wrap text-white font-bold px-2 py-2 border-none rounded-md bg-pink-800";
+	const botStyle = "h-full w-[60%] text-wrap text-white font-bold  px-2 py-2 ml-auto border-none rounded-md bg-blue-800";
+
+	const handleSubmit = async (e: { preventDefault: () => void; }) => {
+
+		e.preventDefault();
+		setChatHistory([...chatHistory, { message: 'Loading...', type: 'bot' }]);
+		setChatHistory([...chatHistory, { message: "Sure based on your provided key words following filter have been applied", type: 'bot' }]);
+
+		fetch(`http://localhost:3000/genai/?search_entry=${message}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setFilterList({ ...data });
+
+				const res = `${JSON.stringify(data)}`
+
+				chrome.runtime.sendMessage({ message: data });
+				setChatHistory([...chatHistory, { message: res, type: 'bot' }]);
+				// console.log(chatHistory);
+			});
+		
+		// console.log(chatHistory);
+
 		setMessage('');
-    }
+	};
 
-	useEffect(() => {
-		chrome.runtime.sendMessage( {type:'content', data : filterList});
-	}, [filterList]);
-  
+	// useEffect(() => {
+
+	// }, [filterList]);
 
 	return (
-		<div className="p-1">
-			<div className="my-2 mx-2 overflow-hidden flex flex-col justify-end gap-2">
-				{ chatHistory.map((item, index) => {
-					if(item.type === 'user') {
+		<div className="w-full p-1">
+			<div className="w-full my-2 mx-2 flex flex-col gap-2">
+				{chatHistory.map((item, index) => {
+					if (isJSONString(item.message)) {
+						const data = JSON.parse(item.message);
+						
 						return (
-							<div key={index} className={`w-max text-wrap text-white px-2 py-2 border-none rounded-md bg-violet-800`}>
+							<ul key={index} className={botStyle}>
+								{Object.keys(data).map((key, index) => {
+									return (
+										<li key={index} className="text-white font-bold">
+											{key} : {data[key]}
+										</li>
+									);
+								})}
+							</ul>
+						)
+
+					} else {
+						return (
+							<div key={index} className={item.type === "user" ? userStyle : botStyle}>
 								{item.message}
 							</div>
 						);
 					}
-					else {
-						return (
-							<div key={index} className={`w-max text-white px-2 py-2 overflow-hidden border-none rounded-md bg-gray-800`}>
-								{item.message}
-							</div>
-						);
-					}
-				}) }
+				})}
 			</div>
 			<div className="flex w-full fixed bottom-2">
 				<input
@@ -56,13 +83,13 @@ const Popup = () => {
 					className="p-2 mr-1 rounded w-full outline-none"
 					placeholder="Hi how can i help"
 					value={message}
-					onChange={(e)=>{setMessage(e.target.value)}}
+					onChange={(e) => { setMessage(e.target.value) }}
 				/>
-				<button 
-					className="bg-blue-300 font-bold p-1 rounded mr-2" 
+				<button
+					className="bg-blue-300 font-bold p-1 rounded mr-2"
 					onClick={handleSubmit}
 				>
-					<IoSend size={20}/>
+					<IoSend size={20} />
 				</button>
 			</div>
 		</div>
