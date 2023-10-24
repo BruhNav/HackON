@@ -3,6 +3,7 @@ console.log('content loaded from my extension!');
 function applyFilter({filter}){
   console.log("run run run")
   const elementsWithAriaLabel = document.querySelectorAll(`[aria-label="${filter}"]`);
+  console.log("this ran after query selector all")
 
   // Loop through the found elements and navigate to the anchor's href
   elementsWithAriaLabel.forEach(element => {
@@ -11,6 +12,7 @@ function applyFilter({filter}){
           window.location.href = anchorTag.href;
       }
   });
+  console.log('this ran after the loop')
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
