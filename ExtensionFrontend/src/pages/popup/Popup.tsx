@@ -32,11 +32,11 @@ const Popup = () => {
 
 	return (
 		<div className="p-1">
-			<div className="my-2 mx-2 overflow-hidden flex flex-col justify-end gap-2">
+			<div className="my-2 mx-2 overflow-hidden flex flex-col flex-end gap-2">
 				{ chatHistory.map((item, index) => {
 					if(item.type === 'user') {
 						return (
-							<div key={index} className={`w-max text-wrap text-white px-2 py-2 border-none rounded-md bg-violet-800`}>
+							<div key={index} className={`w-max ml-auto text-white px-2 py-2 border-none rounded-md bg-violet-800`}>
 								{item.message}
 							</div>
 						);
