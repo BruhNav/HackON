@@ -12,22 +12,32 @@ const Popup = () => {
 	
 	const handleSubmit = (e: { preventDefault: () => void; }) => {
 		e.preventDefault();
+		setChatHistory([...chatHistory, {message: message, type: 'user'}]);
 		chrome.runtime.sendMessage( {type:'background', data : message} , (response) => {
 			if(response) console.log(response.response);
-			//setFilterList(response.response);
+
+			// setFilterList(response.response);
+
+			// setChatHistory([...chatHistory, {message: response.response, type: 'bot'}]);
 		});
 		setMessage('');
     }
 
-  useEffect(() => {
-    chrome.runtime.sendMessage( {type:'content', data : filterList});
-  }, [filterList]);
+	useEffect(() => {
+		chrome.runtime.sendMessage( {type:'content', data : filterList});
+	}, [filterList]);
   
 
 	return (
 		<div className="p-1">
 			<div>
-				
+				{ chatHistory.map((item, index) => {
+					return (
+						<div key={index}>
+						{item.key} : {item.message}
+						</div>
+					);
+				}) }
 			</div>
 			<div className="flex w-full fixed bottom-2">
 				<input
